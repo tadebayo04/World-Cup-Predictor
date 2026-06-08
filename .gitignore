@@ -1,1 +1,2 @@
 venv/
+echo "data/raw/transfermarkt/game_lineups.csv" >> .gitignoredata/raw/transfermarkt/game_lineups.csv
