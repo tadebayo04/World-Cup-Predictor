@@ -1,2 +1,8 @@
 venv/
-echo "data/raw/transfermarkt/game_lineups.csv" >> .gitignoredata/raw/transfermarkt/game_lineups.csv
+.DS_Store
+
+# Large raw data files (re-downloadable from Transfermarkt)
+data/raw/transfermarkt/game_lineups.csv
+
+# Trained models (regenerate with python src/train.py)
+data/models/
