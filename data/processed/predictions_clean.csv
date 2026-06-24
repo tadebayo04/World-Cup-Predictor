@@ -1,0 +1,73 @@
+Date,Home Team,Away Team,Venue,RF Prediction,RF Home Win%,RF Draw%,RF Away Win%,LR Prediction,LR Home Win%,LR Draw%,LR Away Win%,Models Agree?
+11 Jun 2026,Mexico,South Africa,Home Advantage,Home Win,61.2%,33.5%,5.3%,Home Win,78.0%,20.0%,2.0%,Yes
+11 Jun 2026,Korea Republic,Czechia,Neutral,Away Win,7.8%,42.2%,50.0%,Away Win,8.0%,36.9%,55.1%,Yes
+12 Jun 2026,Canada,Bosnia and Herzegovina,Home Advantage,Home Win,46.5%,39.6%,13.9%,Home Win,46.9%,41.0%,12.1%,Yes
+12 Jun 2026,USA,Paraguay,Home Advantage,Away Win,27.4%,30.4%,42.2%,Draw,32.1%,37.9%,30.0%,No
+13 Jun 2026,Qatar,Switzerland,Neutral,Away Win,3.1%,28.6%,68.4%,Away Win,0.7%,22.5%,76.8%,Yes
+13 Jun 2026,Brazil,Morocco,Neutral,Away Win,10.0%,35.8%,54.2%,Away Win,9.5%,40.0%,50.5%,Yes
+13 Jun 2026,Haiti,Scotland,Neutral,Draw,20.1%,46.1%,33.8%,Draw,13.0%,57.2%,29.9%,Yes
+13 Jun 2026,Australia,Türkiye,Neutral,Away Win,2.2%,29.5%,68.2%,Away Win,1.1%,12.7%,86.1%,Yes
+14 Jun 2026,Germany,Curaçao,Neutral,Home Win,50.9%,23.1%,26.1%,Home Win,41.3%,35.4%,23.3%,Yes
+14 Jun 2026,Côte d'Ivoire,Ecuador,Neutral,Home Win,90.5%,8.8%,0.7%,Home Win,89.8%,9.7%,0.5%,Yes
+14 Jun 2026,Netherlands,Japan,Neutral,Draw,26.5%,52.4%,21.1%,Draw,34.3%,42.5%,23.2%,Yes
+14 Jun 2026,Sweden,Tunisia,Neutral,Away Win,6.3%,23.3%,70.4%,Away Win,2.6%,13.4%,84.0%,Yes
+15 Jun 2026,Belgium,Egypt,Neutral,Draw,35.2%,55.0%,9.8%,Draw,36.9%,50.3%,12.8%,Yes
+15 Jun 2026,IR Iran,New Zealand,Neutral,Home Win,75.0%,21.2%,3.8%,Home Win,68.6%,27.8%,3.6%,Yes
+15 Jun 2026,Spain,Cabo Verde,Neutral,Home Win,49.0%,40.2%,10.8%,Draw,40.8%,48.8%,10.3%,No
+15 Jun 2026,Saudi Arabia,Uruguay,Neutral,Away Win,10.9%,32.7%,56.3%,Away Win,5.6%,36.3%,58.0%,Yes
+16 Jun 2026,France,Senegal,Neutral,Away Win,8.6%,33.9%,57.5%,Away Win,5.0%,29.6%,65.4%,Yes
+16 Jun 2026,Iraq,Norway,Neutral,Home Win,51.3%,18.8%,30.0%,Home Win,45.3%,31.9%,22.8%,Yes
+16 Jun 2026,Argentina,Algeria,Neutral,Home Win,82.1%,14.9%,3.0%,Home Win,81.9%,15.6%,2.5%,Yes
+16 Jun 2026,Austria,Jordan,Neutral,Home Win,64.4%,27.7%,8.0%,Home Win,56.9%,34.0%,9.1%,Yes
+17 Jun 2026,Portugal,Congo DR,Neutral,Draw,25.3%,46.2%,28.5%,Draw,11.7%,46.7%,41.6%,Yes
+17 Jun 2026,Uzbekistan,Colombia,Neutral,Away Win,9.5%,41.9%,48.6%,Away Win,5.9%,31.3%,62.8%,Yes
+17 Jun 2026,England,Croatia,Neutral,Home Win,42.0%,33.1%,24.9%,Draw,29.7%,39.1%,31.2%,No
+17 Jun 2026,Ghana,Panama,Neutral,Away Win,5.3%,28.6%,66.1%,Away Win,1.7%,20.0%,78.3%,Yes
+18 Jun 2026,Czechia,South Africa,Neutral,Home Win,61.2%,32.8%,6.0%,Home Win,60.9%,34.4%,4.7%,Yes
+18 Jun 2026,Mexico,Korea Republic,Home Advantage,Draw,33.5%,56.3%,10.3%,Home Win,54.1%,31.7%,14.2%,No
+18 Jun 2026,Switzerland,Bosnia and Herzegovina,Neutral,Home Win,45.7%,38.3%,16.0%,Draw,27.0%,53.6%,19.4%,No
+18 Jun 2026,Canada,Qatar,Home Advantage,Home Win,68.6%,28.4%,3.0%,Home Win,79.3%,19.8%,0.9%,Yes
+19 Jun 2026,Scotland,Morocco,Neutral,Draw,33.0%,41.4%,25.7%,Home Win,49.3%,37.0%,13.7%,No
+19 Jun 2026,Brazil,Haiti,Neutral,Home Win,53.9%,38.8%,7.2%,Home Win,55.4%,30.9%,13.6%,Yes
+19 Jun 2026,USA,Australia,Home Advantage,Away Win,2.4%,26.8%,70.8%,Away Win,1.4%,24.5%,74.1%,Yes
+19 Jun 2026,Türkiye,Paraguay,Neutral,Home Win,44.1%,43.1%,12.8%,Home Win,48.9%,42.8%,8.3%,Yes
+20 Jun 2026,Germany,Côte d'Ivoire,Neutral,Home Win,75.2%,16.9%,7.8%,Home Win,52.5%,29.4%,18.2%,Yes
+20 Jun 2026,Ecuador,Curaçao,Neutral,Home Win,65.2%,30.3%,4.5%,Home Win,60.2%,33.5%,6.3%,Yes
+20 Jun 2026,Netherlands,Sweden,Neutral,Draw,31.2%,48.4%,20.4%,Draw,24.9%,47.3%,27.8%,Yes
+20 Jun 2026,Tunisia,Japan,Neutral,Away Win,1.0%,11.8%,87.2%,Away Win,0.3%,4.5%,95.1%,Yes
+21 Jun 2026,Belgium,IR Iran,Neutral,Draw,27.9%,59.5%,12.5%,Draw,22.5%,55.1%,22.4%,Yes
+21 Jun 2026,New Zealand,Egypt,Neutral,Away Win,3.7%,31.3%,65.0%,Away Win,1.6%,22.7%,75.6%,Yes
+21 Jun 2026,Spain,Saudi Arabia,Neutral,Home Win,63.2%,32.6%,4.2%,Home Win,67.4%,30.5%,2.1%,Yes
+21 Jun 2026,Uruguay,Cabo Verde,Neutral,Draw,27.0%,38.5%,34.6%,Draw,21.4%,46.8%,31.8%,Yes
+22 Jun 2026,France,Iraq,Neutral,Home Win,82.8%,10.0%,7.2%,Home Win,68.2%,24.6%,7.2%,Yes
+22 Jun 2026,Norway,Senegal,Neutral,Home Win,37.6%,30.6%,31.8%,Draw,30.8%,37.0%,32.2%,No
+22 Jun 2026,Argentina,Austria,Neutral,Draw,34.4%,40.3%,25.3%,Home Win,39.9%,31.7%,28.4%,No
+22 Jun 2026,Jordan,Algeria,Neutral,Away Win,5.3%,30.8%,63.8%,Away Win,2.2%,23.9%,73.9%,Yes
+23 Jun 2026,Portugal,Uzbekistan,Neutral,Draw,39.3%,46.8%,13.9%,Draw,26.1%,58.3%,15.6%,Yes
+23 Jun 2026,Colombia,Congo DR,Neutral,Draw,28.6%,38.9%,32.5%,Away Win,18.7%,36.6%,44.8%,No
+23 Jun 2026,England,Ghana,Neutral,Home Win,75.9%,22.6%,1.5%,Home Win,78.4%,20.5%,1.0%,Yes
+23 Jun 2026,Panama,Croatia,Neutral,Away Win,14.1%,27.3%,58.5%,Away Win,10.5%,23.6%,65.9%,Yes
+24 Jun 2026,Mexico,Czechia,Home Advantage,Draw,18.8%,46.8%,34.4%,Draw,28.9%,50.7%,20.5%,Yes
+24 Jun 2026,South Africa,Korea Republic,Neutral,Away Win,7.6%,38.2%,54.2%,Away Win,4.1%,26.3%,69.7%,Yes
+24 Jun 2026,Canada,Switzerland,Home Advantage,Draw,13.0%,67.7%,19.3%,Draw,27.4%,47.9%,24.7%,Yes
+24 Jun 2026,Bosnia and Herzegovina,Qatar,Neutral,Home Win,61.6%,32.6%,5.9%,Home Win,51.1%,43.6%,5.4%,Yes
+24 Jun 2026,Scotland,Brazil,Neutral,Home Win,71.4%,26.2%,2.4%,Home Win,62.8%,33.2%,4.1%,Yes
+24 Jun 2026,Morocco,Haiti,Neutral,Away Win,8.5%,43.5%,48.0%,Away Win,3.3%,35.6%,61.1%,Yes
+25 Jun 2026,USA,Türkiye,Home Advantage,Away Win,5.6%,36.4%,58.0%,Away Win,9.6%,21.3%,69.1%,Yes
+25 Jun 2026,Paraguay,Australia,Neutral,Draw,38.4%,41.7%,19.9%,Draw,30.7%,46.8%,22.5%,Yes
+25 Jun 2026,Curaçao,Côte d'Ivoire,Neutral,Away Win,4.5%,9.3%,86.2%,Away Win,0.7%,13.0%,86.3%,Yes
+25 Jun 2026,Ecuador,Germany,Neutral,Away Win,5.6%,17.2%,77.2%,Away Win,1.5%,13.5%,85.0%,Yes
+25 Jun 2026,Japan,Sweden,Neutral,Home Win,74.7%,20.9%,4.4%,Home Win,82.8%,12.5%,4.7%,Yes
+25 Jun 2026,Tunisia,Netherlands,Neutral,Draw,6.8%,58.1%,35.1%,Away Win,5.3%,36.8%,58.0%,No
+26 Jun 2026,Egypt,IR Iran,Neutral,Home Win,45.5%,44.0%,10.5%,Draw,34.9%,52.0%,13.0%,No
+26 Jun 2026,New Zealand,Belgium,Neutral,Draw,19.8%,46.1%,34.1%,Away Win,8.9%,45.4%,45.7%,No
+26 Jun 2026,Cabo Verde,Saudi Arabia,Neutral,Away Win,0.8%,14.9%,84.3%,Away Win,0.4%,15.5%,84.1%,Yes
+26 Jun 2026,Uruguay,Spain,Neutral,Away Win,26.0%,15.5%,58.5%,Away Win,10.1%,34.3%,55.6%,Yes
+26 Jun 2026,Norway,France,Neutral,Home Win,51.8%,28.1%,20.1%,Home Win,44.7%,34.2%,21.0%,Yes
+26 Jun 2026,Senegal,Iraq,Neutral,Away Win,7.8%,33.4%,58.8%,Away Win,3.5%,31.4%,65.2%,Yes
+27 Jun 2026,Algeria,Austria,Neutral,Draw,38.4%,42.3%,19.3%,Home Win,46.0%,40.5%,13.5%,No
+27 Jun 2026,Jordan,Argentina,Neutral,Away Win,7.6%,31.7%,60.7%,Away Win,5.5%,31.3%,63.2%,Yes
+27 Jun 2026,Colombia,Portugal,Neutral,Away Win,4.2%,30.2%,65.6%,Away Win,7.8%,25.7%,66.5%,Yes
+27 Jun 2026,Congo DR,Uzbekistan,Neutral,Away Win,1.1%,15.7%,83.2%,Away Win,0.3%,8.0%,91.8%,Yes
+27 Jun 2026,Panama,England,Neutral,Draw,23.2%,43.1%,33.6%,Draw,16.4%,57.7%,25.9%,Yes
+27 Jun 2026,Croatia,Ghana,Neutral,Home Win,74.0%,22.4%,3.5%,Home Win,80.9%,17.3%,1.8%,Yes
