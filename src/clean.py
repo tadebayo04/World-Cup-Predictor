@@ -1,21 +1,26 @@
+import os
 import pandas as pd
 import numpy as np
 
+_ROOT = os.path.join(os.path.dirname(__file__), '..')
+
 def load_data():
-    # Match results
-    results = pd.read_csv('../data/raw/results.csv')
+    # Match results — na_values=['NA'] ensures knockout rows with "NA,NA" scores
+    # are parsed as NaN rather than the string "NA", so they land in future_fixtures
+    results = pd.read_csv(os.path.join(_ROOT, 'data/raw/results.csv'), na_values=['NA'])
 
     # FIFA rankings
-    fifa_rankings = pd.read_csv('../data/raw/fifa_rankings.csv')
+    fifa_rankings = pd.read_csv(os.path.join(_ROOT, 'data/raw/fifa_rankings.csv'))
 
     # Transfermarkt files
-    players = pd.read_csv('../data/raw/transfermarkt/players.csv')
+    players = pd.read_csv(os.path.join(_ROOT, 'data/raw/transfermarkt/players.csv'))
     player_valuations = pd.read_csv(
-        '../data/raw/transfermarkt/player_valuations.csv')
-    national_teams = pd.read_csv('../data/raw/transfermarkt/national_teams.csv')
-    games = pd.read_csv('../data/raw/transfermarkt/games.csv')
-    game_lineups = pd.read_csv(
-        '../data/raw/transfermarkt/game_lineups.csv', low_memory=False)
+        os.path.join(_ROOT, 'data/raw/transfermarkt/player_valuations.csv'))
+    national_teams = pd.read_csv(os.path.join(_ROOT, 'data/raw/transfermarkt/national_teams.csv'))
+    games = pd.read_csv(os.path.join(_ROOT, 'data/raw/transfermarkt/games.csv'))
+    lineups_path = os.path.join(_ROOT, 'data/raw/transfermarkt/game_lineups.csv')
+    game_lineups = (pd.read_csv(lineups_path, low_memory=False)
+                    if os.path.exists(lineups_path) else pd.DataFrame())
     
     return results, fifa_rankings, players, player_valuations, national_teams, games, game_lineups
 
@@ -111,12 +116,14 @@ def clean_national_teams(national_teams):
     return national_teams
 
 def save_data(historical_results, future_fixtures, fifa_rankings, players, player_valuations, national_teams):
-    historical_results.to_csv('../data/processed/historical_results.csv', index=False)
-    future_fixtures.to_csv('../data/processed/future_fixtures.csv', index=False)
-    fifa_rankings.to_csv('../data/processed/fifa_rankings_clean.csv', index=False)
-    players.to_csv('../data/processed/players_clean.csv', index=False)
-    player_valuations.to_csv('../data/processed/player_valuations_clean.csv', index=False)
-    national_teams.to_csv('../data/processed/national_teams_clean.csv', index=False)
+    processed = os.path.join(_ROOT, 'data/processed')
+    os.makedirs(processed, exist_ok=True)
+    historical_results.to_csv(os.path.join(processed, 'historical_results.csv'), index=False)
+    future_fixtures.to_csv(os.path.join(processed, 'future_fixtures.csv'), index=False)
+    fifa_rankings.to_csv(os.path.join(processed, 'fifa_rankings_clean.csv'), index=False)
+    players.to_csv(os.path.join(processed, 'players_clean.csv'), index=False)
+    player_valuations.to_csv(os.path.join(processed, 'player_valuations_clean.csv'), index=False)
+    national_teams.to_csv(os.path.join(processed, 'national_teams_clean.csv'), index=False)
     print('All files saved to data/processed/')
 
 if __name__ == '__main__':

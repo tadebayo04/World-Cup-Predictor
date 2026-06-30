@@ -31,25 +31,28 @@ _DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 _PROCESSED = os.path.join(_DATA_DIR, 'processed')
 _RAW = os.path.join(_DATA_DIR, 'raw')
 
+_NEUTRAL_MAP = {True: 1, False: 0, 'True': 1, 'False': 0, 'TRUE': 1, 'FALSE': 0}
 
-def load_processed_data():
-    """Load processed CSVs needed to build the model-ready feature matrix.
 
-    Returns:
-        hist: historical_results_features.csv with squad value columns already merged
-        future: future_fixtures.csv (72 upcoming 2026 WC matches)
-        valuations: player_valuations_clean.csv
-        players: players_clean.csv
-        rankings: fifa_rankings_clean.csv
+# ──────────────────────────────────────────────────────────────────────────────
+# Data loading
+# ──────────────────────────────────────────────────────────────────────────────
+
+def load_source_data(use_prebuilt_features=False):
+    """Load source CSVs for the feature-building pipeline.
+
+    use_prebuilt_features=True  → fast path: loads historical_results_features.csv
+    use_prebuilt_features=False → full rebuild path: loads historical_results.csv
     """
-    hist = pd.read_csv(os.path.join(_PROCESSED, 'historical_results_features.csv'))
+    hist_file = 'historical_results_features.csv' if use_prebuilt_features else 'historical_results.csv'
+    hist = pd.read_csv(os.path.join(_PROCESSED, hist_file))
     hist['date'] = pd.to_datetime(hist['date'], errors='coerce')
     hist = hist.dropna(subset=['date']).sort_values('date').reset_index(drop=True)
-    hist['neutral'] = hist['neutral'].map({True: 1, False: 0, 'True': 1, 'False': 0}).astype(int)
+    hist['neutral'] = hist['neutral'].map(_NEUTRAL_MAP).fillna(0).astype(int)
 
     future = pd.read_csv(os.path.join(_PROCESSED, 'future_fixtures.csv'))
     future['date'] = pd.to_datetime(future['date'])
-    future['neutral'] = future['neutral'].map({True: 1, False: 0, 'True': 1, 'False': 0}).fillna(0).astype(int)
+    future['neutral'] = future['neutral'].map(_NEUTRAL_MAP).fillna(0).astype(int)
 
     valuations = pd.read_csv(os.path.join(_PROCESSED, 'player_valuations_clean.csv'))
     valuations['date'] = pd.to_datetime(valuations['date'])
@@ -62,6 +65,194 @@ def load_processed_data():
 
     return hist, future, valuations, players, rankings
 
+
+def load_processed_data():
+    """Load processed CSVs (legacy entry point — keeps notebook callers working).
+
+    Returns:
+        hist: historical_results_features.csv with squad value columns already merged
+        future: future_fixtures.csv
+        valuations: player_valuations_clean.csv
+        players: players_clean.csv
+        rankings: fifa_rankings_clean.csv
+    """
+    hist = pd.read_csv(os.path.join(_PROCESSED, 'historical_results_features.csv'))
+    hist['date'] = pd.to_datetime(hist['date'], errors='coerce')
+    hist = hist.dropna(subset=['date']).sort_values('date').reset_index(drop=True)
+    hist['neutral'] = hist['neutral'].map(_NEUTRAL_MAP).fillna(0).astype(int)
+
+    future = pd.read_csv(os.path.join(_PROCESSED, 'future_fixtures.csv'))
+    future['date'] = pd.to_datetime(future['date'])
+    future['neutral'] = future['neutral'].map(_NEUTRAL_MAP).fillna(0).astype(int)
+
+    valuations = pd.read_csv(os.path.join(_PROCESSED, 'player_valuations_clean.csv'))
+    valuations['date'] = pd.to_datetime(valuations['date'])
+
+    players = pd.read_csv(os.path.join(_PROCESSED, 'players_clean.csv'))
+
+    rankings = pd.read_csv(os.path.join(_PROCESSED, 'fifa_rankings_clean.csv'))
+    rankings['rank_date'] = pd.to_datetime(rankings['rank_date'])
+    rankings = rankings.sort_values('rank_date')
+
+    return hist, future, valuations, players, rankings
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# From-scratch feature builders
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_ranking_features(hist, rankings):
+    """Merge the closest-prior FIFA ranking snapshot onto each match row."""
+    ranks = rankings[['country_full', 'rank_date', 'rank', 'total_points']]
+
+    home_rank = ranks.rename(columns={
+        'country_full': 'home_team', 'rank_date': 'date',
+        'rank': 'home_rank', 'total_points': 'home_points',
+    })
+    away_rank = ranks.rename(columns={
+        'country_full': 'away_team', 'rank_date': 'date',
+        'rank': 'away_rank', 'total_points': 'away_points',
+    })
+
+    hist = hist.sort_values('date')
+    hist = pd.merge_asof(hist, home_rank, on='date', by='home_team', direction='backward')
+    hist = pd.merge_asof(hist, away_rank, on='date', by='away_team', direction='backward')
+    hist['points_diff'] = hist['home_points'] - hist['away_points']
+    return hist
+
+
+def build_team_form_timeseries(hist):
+    """Build per-team rolling form from all historical results.
+
+    Combines home and away appearances into a single long-format series per team.
+    shift(1) before rolling ensures the current match's result is never included.
+    Returns one row per (team, match) with pre-match rolling form values.
+    """
+    home = hist[['date', 'home_team', 'home_score', 'away_score']].copy()
+    home.columns = ['date', 'team', 'goals_for', 'goals_against']
+
+    away = hist[['date', 'away_team', 'away_score', 'home_score']].copy()
+    away.columns = ['date', 'team', 'goals_for', 'goals_against']
+
+    combined = pd.concat([home, away], ignore_index=True)
+    combined['goal_diff'] = combined['goals_for'] - combined['goals_against']
+    combined['form_pts'] = np.select(
+        [combined['goals_for'] > combined['goals_against'],
+         combined['goals_for'] == combined['goals_against']],
+        [3, 1], default=0,
+    )
+    combined = combined.sort_values(['team', 'date']).reset_index(drop=True)
+
+    grp = combined.groupby('team', group_keys=False)
+    combined['form_5']       = grp['form_pts'].transform(lambda x: x.shift(1).rolling(5,  min_periods=1).mean())
+    combined['form_10']      = grp['form_pts'].transform(lambda x: x.shift(1).rolling(10, min_periods=1).mean())
+    combined['goal_diff_5']  = grp['goal_diff'].transform(lambda x: x.shift(1).rolling(5,  min_periods=1).mean())
+    combined['goal_diff_10'] = grp['goal_diff'].transform(lambda x: x.shift(1).rolling(10, min_periods=1).mean())
+
+    return combined[['date', 'team', 'form_5', 'form_10', 'goal_diff_5', 'goal_diff_10']]
+
+
+def merge_form_features(hist, form_ts):
+    """Merge pre-match form timeseries onto hist for home and away teams.
+
+    Deduplicates form_ts by (date, team) before merging to avoid row explosion
+    from rare same-day appearances.  After merge, deduplicates hist rows that
+    arise from British Home Championship fixtures in old data.
+    """
+    form_deduped = form_ts.drop_duplicates(subset=['date', 'team'])
+
+    home_form = form_deduped.rename(columns={
+        'team': 'home_team',
+        'form_5': 'home_form_5', 'form_10': 'home_form_10',
+        'goal_diff_5': 'home_goal_diff_5', 'goal_diff_10': 'home_goal_diff_10',
+    })
+    away_form = form_deduped.rename(columns={
+        'team': 'away_team',
+        'form_5': 'away_form_5', 'form_10': 'away_form_10',
+        'goal_diff_5': 'away_goal_diff_5', 'goal_diff_10': 'away_goal_diff_10',
+    })
+
+    hist = hist.merge(
+        home_form[['date', 'home_team', 'home_form_5', 'home_form_10',
+                   'home_goal_diff_5', 'home_goal_diff_10']],
+        on=['date', 'home_team'], how='left',
+    )
+    hist = hist.merge(
+        away_form[['date', 'away_team', 'away_form_5', 'away_form_10',
+                   'away_goal_diff_5', 'away_goal_diff_10']],
+        on=['date', 'away_team'], how='left',
+    )
+    hist = hist.drop_duplicates(subset=['date', 'home_team', 'away_team'], keep='first')
+    return hist
+
+
+def build_h2h_features(hist):
+    """Add cumulative H2H counts using canonical (alphabetical) team ordering.
+
+    shift(1) before expanding sum prevents the current match's result leaking
+    into its own H2H features.
+    """
+    hist = hist.copy()
+    hist['team1'] = hist[['home_team', 'away_team']].min(axis=1)
+    hist['team2'] = hist[['home_team', 'away_team']].max(axis=1)
+
+    # team1 = alphabetically first; team1_won=1 whether team1 was home or away
+    hist['_t1_won'] = np.where(
+        hist['home_team'] == hist['team1'],
+        (hist['home_score'] > hist['away_score']).astype(int),
+        (hist['away_score'] > hist['home_score']).astype(int),
+    )
+    hist['_t2_won'] = np.where(
+        hist['away_team'] == hist['team2'],
+        (hist['away_score'] > hist['home_score']).astype(int),
+        (hist['home_score'] > hist['away_score']).astype(int),
+    )
+    hist['_draw'] = (hist['home_score'] == hist['away_score']).astype(int)
+
+    hist = hist.sort_values(['team1', 'team2', 'date']).reset_index(drop=True)
+
+    for src, dst in [('_t1_won', 'h2h_team1_wins'),
+                     ('_t2_won', 'h2h_team2_wins'),
+                     ('_draw',   'h2h_draw')]:
+        hist[dst] = (hist
+                     .groupby(['team1', 'team2'])[src]
+                     .transform(lambda x: x.shift(1).expanding().sum().fillna(0)))
+
+    hist = hist.drop(columns=['_t1_won', '_t2_won', '_draw'])
+    hist = hist.sort_values('date').reset_index(drop=True)
+    return hist
+
+
+def build_all_features_from_scratch(hist_raw, rankings, squad_values):
+    """Build the full feature matrix from cleaned (but un-featured) match data.
+
+    Form and H2H are computed on ALL historical data before filtering to post-1992
+    so that early 1993 matches correctly reflect pre-1992 rolling history.
+    """
+    hist = hist_raw.copy()
+    hist['date'] = pd.to_datetime(hist['date'], errors='coerce')
+    hist = hist.dropna(subset=['date']).sort_values('date').reset_index(drop=True)
+    hist['neutral'] = hist['neutral'].map(_NEUTRAL_MAP).fillna(0).astype(int)
+
+    # Form and H2H on the full dataset (preserves pre-1992 context for early post-92 matches)
+    form_ts = build_team_form_timeseries(hist)
+    hist = merge_form_features(hist, form_ts)
+    hist = build_h2h_features(hist)
+
+    # Rankings: filter to post-1992 + matches with valid ranking data
+    hist = build_ranking_features(hist, rankings)
+    hist = hist[(hist['date'] >= '1993-01-01') & hist['home_rank'].notna() & hist['away_rank'].notna()]
+    hist = hist.reset_index(drop=True)
+
+    # Squad values via merge_asof
+    hist = merge_squad_values(hist, squad_values)
+
+    return hist
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Squad value features (used in both fast and full-rebuild paths)
+# ──────────────────────────────────────────────────────────────────────────────
 
 def build_squad_value_features(valuations, players):
     """Build squad value timeseries from player valuations and citizenship data.
@@ -112,6 +303,10 @@ def merge_squad_values(df, squad_values):
     return df
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Derived features (applied last, in both paths)
+# ──────────────────────────────────────────────────────────────────────────────
+
 def add_derived_features(df):
     """Add h2h ratio features and log-scaled squad value columns."""
     # H2H win rate for the home team.
@@ -131,6 +326,10 @@ def add_derived_features(df):
     return df
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Future fixtures
+# ──────────────────────────────────────────────────────────────────────────────
+
 def _build_team_latest_state(historical):
     """Return a per-team lookup of the most recent form and goal diff values."""
     home_rows = historical[['date', 'home_team', 'home_form_5', 'home_form_10',
@@ -146,7 +345,7 @@ def _build_team_latest_state(historical):
 
 
 def apply_features_to_future_fixtures(future, historical, rankings, squad_values):
-    """Build the full feature set for the 72 upcoming 2026 WC fixtures.
+    """Build the full feature set for upcoming fixtures.
 
     Uses the historical record as of the most recent match per team for form
     and H2H features; merge_asof for rankings and squad values.
@@ -200,15 +399,21 @@ def apply_features_to_future_fixtures(future, historical, rankings, squad_values
     # --- Squad values ---
     future = merge_squad_values(future, squad_values)
 
-    # All group-stage WC fixtures share the same tournament weight
     future['tournament_weight'] = 4
 
     return future
 
 
-def build_feature_matrix(df, include_target=True):
-    """Select the final 18 feature columns (+ optional outcome target)."""
-    cols = FEATURE_COLS.copy()
+# ──────────────────────────────────────────────────────────────────────────────
+# Output
+# ──────────────────────────────────────────────────────────────────────────────
+
+def build_feature_matrix(df, include_target=True, include_date=False):
+    """Select the final 18 feature columns (+ optional outcome target and date)."""
+    cols = []
+    if include_date:
+        cols.append('date')
+    cols.extend(FEATURE_COLS)
     if include_target:
         cols.append('outcome')
     return df[cols].copy()
@@ -223,11 +428,27 @@ def save_model_ready(train_df, future_df):
 
 
 if __name__ == '__main__':
-    hist, future, valuations, players, rankings = load_processed_data()
+    import argparse
+    parser = argparse.ArgumentParser(description='Build model-ready feature matrix')
+    parser.add_argument('--use-prebuilt', action='store_true',
+                        help='Skip full rebuild and load existing historical_results_features.csv')
+    args = parser.parse_args()
+
+    hist, future, valuations, players, rankings = load_source_data(
+        use_prebuilt_features=args.use_prebuilt
+    )
     squad_values = build_squad_value_features(valuations, players)
+
+    if not args.use_prebuilt:
+        hist = build_all_features_from_scratch(hist, rankings, squad_values)
+        hist.to_csv(os.path.join(_PROCESSED, 'historical_results_features.csv'), index=False)
+        print(f"Saved historical_results_features.csv ({len(hist):,} rows)")
+
     hist = add_derived_features(hist)
     future_enriched = apply_features_to_future_fixtures(future, hist, rankings, squad_values)
     future_enriched = add_derived_features(future_enriched)
-    train_matrix = build_feature_matrix(hist, include_target=True)
-    future_matrix = build_feature_matrix(future_enriched, include_target=False)
-    save_model_ready(train_matrix, future_matrix)
+
+    save_model_ready(
+        build_feature_matrix(hist, include_target=True, include_date=True),
+        build_feature_matrix(future_enriched, include_target=False),
+    )

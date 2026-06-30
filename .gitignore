@@ -1,5 +1,7 @@
 venv/
 .DS_Store
+__pycache__/
+*.pyc
 
 # Large raw data files (re-downloadable from Transfermarkt)
 data/raw/transfermarkt/game_lineups.csv

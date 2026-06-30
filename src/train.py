@@ -32,21 +32,16 @@ def time_based_split(df, test_cutoff=TEST_CUTOFF):
     Keeps 2022 Qatar World Cup and 2022-2026 qualifiers in the test set,
     giving a realistic evaluation of World Cup prediction performance.
     """
-    # model_ready.csv doesn't have a date column — re-join from features CSV
-    features_with_date = pd.read_csv(os.path.join(_PROCESSED, 'historical_results_features.csv'),
-                                     usecols=['date'])
-    features_with_date['date'] = pd.to_datetime(features_with_date['date'], errors='coerce')
-    features_with_date = features_with_date.dropna()
-
-    mask = features_with_date['date'] >= test_cutoff
-    train_idx = ~mask
-    test_idx = mask
+    dates = pd.to_datetime(df['date'], errors='coerce')
+    mask = dates >= test_cutoff
 
     X = df[FEATURE_COLS]
     y = df['outcome']
 
-    X_train, X_test = X[train_idx].reset_index(drop=True), X[test_idx].reset_index(drop=True)
-    y_train, y_test = y[train_idx].reset_index(drop=True), y[test_idx].reset_index(drop=True)
+    X_train = X[~mask].reset_index(drop=True)
+    X_test  = X[mask].reset_index(drop=True)
+    y_train = y[~mask].reset_index(drop=True)
+    y_test  = y[mask].reset_index(drop=True)
 
     print(f"Train: {len(X_train):,} rows | Test: {len(X_test):,} rows")
     print(f"Test class distribution:\n{y_test.value_counts()}")
@@ -146,8 +141,9 @@ def save_model(model, name):
     print(f"Saved model → {path}")
 
 
-def predict_fixtures(rf, lr, X_future_rf, X_future_lr, future_meta):
-    """Generate predictions for all 2026 WC fixtures from both models.
+def predict_fixtures(rf, lr, X_future_rf, X_future_lr, future_meta,
+                     output_filename='predictions.csv'):
+    """Generate predictions for upcoming fixtures from both models.
 
     Returns a DataFrame with match metadata plus per-model predicted class
     and win/draw probabilities.
@@ -171,13 +167,21 @@ def predict_fixtures(rf, lr, X_future_rf, X_future_lr, future_meta):
     results['lr_away_win_prob'] = lr_proba[:, aw_idx]
     results['lr_draw_prob'] = lr_proba[:, dr_idx]
 
-    out_path = os.path.join(_PROCESSED, 'predictions.csv')
+    out_path = os.path.join(_PROCESSED, output_filename)
     results.to_csv(out_path, index=False)
     print(f"Predictions saved → {out_path}  ({len(results)} fixtures)")
     return results
 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description='Train models and predict fixtures')
+    parser.add_argument('--model-suffix', default='',
+                        help='Suffix appended to saved model filenames (e.g. "_v2")')
+    parser.add_argument('--output', default='predictions.csv',
+                        help='Output filename for fixture predictions (default: predictions.csv)')
+    args = parser.parse_args()
+
     # ── Load data ──────────────────────────────────────────────────────────────
     train_df, future_df, future_meta = load_model_ready()
 
@@ -202,11 +206,13 @@ if __name__ == '__main__':
     lr_metrics = evaluate_model(lr, X_test_lr, y_test, 'Logistic Regression')
 
     # ── Save models ────────────────────────────────────────────────────────────
-    save_model(rf, 'random_forest')
-    save_model(lr, 'logistic_regression')
-    save_model(scaler, 'scaler')
+    suffix = args.model_suffix
+    save_model(rf,     f'random_forest{suffix}')
+    save_model(lr,     f'logistic_regression{suffix}')
+    save_model(scaler, f'scaler{suffix}')
 
-    # ── Predict 2026 WC fixtures ───────────────────────────────────────────────
-    predictions = predict_fixtures(rf, lr, X_future_rf, X_future_lr, future_meta)
+    # ── Predict fixtures ───────────────────────────────────────────────────────
+    predictions = predict_fixtures(rf, lr, X_future_rf, X_future_lr, future_meta,
+                                   output_filename=args.output)
     print("\nSample predictions:")
     print(predictions[['home_team', 'away_team', 'rf_prediction', 'lr_prediction']].head(10).to_string(index=False))
