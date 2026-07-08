@@ -1,14 +1,5 @@
 date,home_team,away_team,home_score,away_score,tournament,city,country,neutral
-2026-06-30,Côte d'Ivoire,Norway,,,FIFA World Cup,Arlington,USA,True
-2026-06-30,France,Sweden,,,FIFA World Cup,East Rutherford,USA,True
-2026-06-30,Mexico,Ecuador,,,FIFA World Cup,Mexico City,Mexico,False
-2026-07-01,England,Congo DR,,,FIFA World Cup,Atlanta,USA,True
-2026-07-01,Belgium,Senegal,,,FIFA World Cup,Seattle,USA,True
-2026-07-01,USA,Bosnia and Herzegovina,,,FIFA World Cup,Santa Clara,USA,False
-2026-07-02,Spain,Austria,,,FIFA World Cup,Inglewood,USA,True
-2026-07-02,Portugal,Croatia,,,FIFA World Cup,Toronto,Canada,True
-2026-07-02,Switzerland,Algeria,,,FIFA World Cup,Vancouver,Canada,True
-2026-07-03,Australia,Egypt,,,FIFA World Cup,Arlington,USA,True
-2026-07-03,Argentina,Cabo Verde,,,FIFA World Cup,Miami Gardens,USA,True
-2026-07-03,Colombia,Ghana,,,FIFA World Cup,Kansas City,USA,True
-2026-07-04,Canada,Morocco,,,FIFA World Cup,Houston,USA,True
+2026-07-09,France,Morocco,,,FIFA World Cup,Foxborough,USA,True
+2026-07-10,Spain,Belgium,,,FIFA World Cup,Inglewood,USA,True
+2026-07-11,Norway,England,,,FIFA World Cup,Miami Gardens,USA,True
+2026-07-11,Argentina,Switzerland,,,FIFA World Cup,Kansas City,USA,True

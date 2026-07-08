@@ -1,0 +1,8 @@
+stage,date,home_team,away_team,rf_prediction,lr_prediction,consensus_prediction,models_agree,rf_home_win_pct,rf_draw_pct,rf_away_win_pct,lr_home_win_pct,lr_draw_pct,lr_away_win_pct
+QF1,2026-07-09,France,Morocco,France,France,France,True,61.9,22.7,15.4,42.7,33.9,23.4
+QF2,2026-07-10,Spain,Belgium,Spain,Spain,Spain,True,43.4,33.5,23.2,34.8,35.5,29.6
+QF3,2026-07-11,Norway,England,England,England,England,True,14.9,31.7,53.4,16.2,29.4,54.4
+QF4,2026-07-11,Argentina,Switzerland,Argentina,Argentina,Argentina,True,59.5,20.7,19.8,39.9,34.4,25.7
+SF1,2026-07-14,France,Spain,Spain,Spain,Spain,True,15.6,43.6,40.9,19.2,36.6,44.2
+SF2,2026-07-15,England,Argentina,Argentina,Argentina,Argentina,True,18.9,27.2,54.0,19.7,33.3,46.9
+Final,2026-07-19,Spain,Argentina,Argentina,Argentina,Argentina,True,33.4,29.8,36.7,26.7,33.6,39.7

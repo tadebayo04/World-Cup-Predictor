@@ -49480,3 +49480,23 @@ date,home_team,away_team,home_score,away_score,tournament,city,country,neutral,o
 2026-06-29,Brazil,Japan,2.0,1.0,FIFA World Cup,Houston,USA,True,Home Win,4
 2026-06-29,Germany,Paraguay,1.0,1.0,FIFA World Cup,Foxborough,USA,True,Draw,4
 2026-06-29,Netherlands,Morocco,1.0,1.0,FIFA World Cup,Guadalupe,Mexico,True,Draw,4
+2026-06-30,Côte d'Ivoire,Norway,1.0,2.0,FIFA World Cup,Arlington,USA,True,Away Win,4
+2026-06-30,France,Sweden,3.0,0.0,FIFA World Cup,East Rutherford,USA,True,Home Win,4
+2026-06-30,Mexico,Ecuador,2.0,0.0,FIFA World Cup,Mexico City,Mexico,False,Home Win,4
+2026-07-01,England,Congo DR,2.0,1.0,FIFA World Cup,Atlanta,USA,True,Home Win,4
+2026-07-01,Belgium,Senegal,3.0,2.0,FIFA World Cup,Seattle,USA,True,Home Win,4
+2026-07-01,USA,Bosnia and Herzegovina,2.0,0.0,FIFA World Cup,Santa Clara,USA,False,Home Win,4
+2026-07-02,Spain,Austria,3.0,0.0,FIFA World Cup,Inglewood,USA,True,Home Win,4
+2026-07-02,Portugal,Croatia,2.0,1.0,FIFA World Cup,Toronto,Canada,True,Home Win,4
+2026-07-02,Switzerland,Algeria,2.0,0.0,FIFA World Cup,Vancouver,Canada,True,Home Win,4
+2026-07-03,Australia,Egypt,1.0,1.0,FIFA World Cup,Arlington,USA,True,Draw,4
+2026-07-03,Argentina,Cabo Verde,3.0,2.0,FIFA World Cup,Miami Gardens,USA,True,Home Win,4
+2026-07-03,Colombia,Ghana,1.0,0.0,FIFA World Cup,Kansas City,USA,True,Home Win,4
+2026-07-04,Canada,Morocco,0.0,3.0,FIFA World Cup,Houston,USA,True,Away Win,4
+2026-07-04,Paraguay,France,0.0,1.0,FIFA World Cup,Philadelphia,USA,True,Away Win,4
+2026-07-05,Brazil,Norway,1.0,2.0,FIFA World Cup,East Rutherford,USA,True,Away Win,4
+2026-07-05,Mexico,England,2.0,3.0,FIFA World Cup,Mexico City,Mexico,False,Away Win,4
+2026-07-06,Portugal,Spain,0.0,1.0,FIFA World Cup,Dallas,USA,True,Away Win,4
+2026-07-06,USA,Belgium,1.0,4.0,FIFA World Cup,Seattle,USA,False,Away Win,4
+2026-07-07,Argentina,Egypt,3.0,2.0,FIFA World Cup,Atlanta,USA,True,Home Win,4
+2026-07-07,Switzerland,Colombia,0.0,0.0,FIFA World Cup,Vancouver,Canada,True,Draw,4
