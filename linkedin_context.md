@@ -150,41 +150,104 @@ These upsets highlight where FIFA ranking and squad value don't capture on-the-d
 
 ---
 
-## Knockout Round Predictions (Round of 32)
+## Knockout Round Predictions (Round of 32) — v2 Models
 
 Both models were retrained on the full dataset including the 72 group stage results (v2 models), then used to predict the 13 confirmed Round of 32 fixtures.
 
 **v2 Model Test Accuracy (2022–2026 holdout):** RF 56.1%, LR 55.1%
-*(Test set now includes the WC group stage, which contains harder-to-predict tournament matches)*
 
-### Round of 32 Predictions
+### Round of 32 Predictions vs Actuals
 
-| Date | Home Team | Away Team | RF | LR | Models Agree? |
+| Date | Home | Away | Score | Actual | RF | LR |
+|---|---|---|---|---|---|---|
+| 30 Jun | Côte d'Ivoire | Norway | 1–2 | Away Win | ✓ Away Win | ✓ Away Win |
+| 30 Jun | France | Sweden | 3–0 | Home Win | ✓ Home Win | ✓ Home Win |
+| 30 Jun | Mexico | Ecuador | 2–0 | Home Win | ✗ Draw | ✓ Home Win |
+| 1 Jul | England | Congo DR | 2–1 | Home Win | ✓ Home Win | ✓ Home Win |
+| 1 Jul | Belgium | Senegal | 3–2 | Home Win | ✗ Away Win | ✗ Away Win |
+| 1 Jul | USA | Bosnia and Herzegovina | 2–0 | Home Win | ✓ Home Win | ✓ Home Win |
+| 2 Jul | Spain | Austria | 3–0 | Home Win | ✓ Home Win | ✓ Home Win |
+| 2 Jul | Portugal | Croatia | 2–1 | Home Win | ✓ Home Win | ✓ Home Win |
+| 2 Jul | Switzerland | Algeria | 2–0 | Home Win | ✗ Draw | ✗ Draw |
+| 3 Jul | Australia | Egypt | 1–1 | Draw | ✓ Draw | ✗ Away Win |
+| 3 Jul | Argentina | Cabo Verde | 3–2 | Home Win | ✓ Home Win | ✓ Home Win |
+| 3 Jul | Colombia | Ghana | 1–0 | Home Win | ✓ Home Win | ✓ Home Win |
+| 4 Jul | Canada | Morocco | 0–3 | Away Win | ✗ Draw | ✓ Away Win |
+
+**R32 Accuracy: RF 69.2% (9/13) · LR 76.9% (10/13)**
+
+Notable: Belgium beat Senegal 3–2 despite both models backing Senegal — the biggest upset of the round. Morocco also thrashed Canada 3–0 where RF only predicted a draw.
+
+---
+
+## Round of 16 Results
+
+The Round of 16 played out July 4–7. These results were used to retrain the v3 models.
+
+| Date | Home | Away | Score | Result |
+|---|---|---|---|---|
+| 4 Jul | Paraguay | France | 0–1 | France advances |
+| 5 Jul | Brazil | Norway | 1–2 | Norway advances (upset) |
+| 5 Jul | Mexico | England | 2–3 | England advances |
+| 6 Jul | Portugal | Spain | 0–1 | Spain advances |
+| 6 Jul | USA | Belgium | 1–4 | Belgium advances (dominant) |
+| 7 Jul | Argentina | Egypt | 3–2 | Argentina advances |
+| 7 Jul | Switzerland | Colombia | 0–0 | TBD via extra time/penalties |
+
+**Key storylines:**
+- Norway continued their surprise run, beating Brazil 2–1
+- Belgium dismantled USA 4–1, making a strong statement as QF contenders
+- Spain edged Portugal 1–0 in a tight Iberian derby
+
+---
+
+## Quarterfinal Predictions — v3 Models
+
+Models retrained on all 96 scored 2026 WC matches (group stage + R32 + R16).
+
+**v3 Model Test Accuracy (2022–2026 holdout):** RF 56.0%, LR 55.3%
+
+All four QF matches: **both models agree on every fixture.**
+
+| Date | Home | Away | RF | LR | RF Probs (HW / D / AW) |
 |---|---|---|---|---|---|
-| 30 Jun | Côte d'Ivoire | Norway | Away Win | Away Win | ✓ |
-| 30 Jun | France | Sweden | Home Win | Home Win | ✓ |
-| 30 Jun | Mexico | Ecuador | Draw | Home Win | ✗ |
-| 1 Jul | England | Congo DR | Home Win | Home Win | ✓ |
-| 1 Jul | Belgium | Senegal | Away Win | Away Win | ✓ |
-| 1 Jul | USA | Bosnia and Herzegovina | Home Win | Home Win | ✓ |
-| 2 Jul | Spain | Austria | Home Win | Home Win | ✓ |
-| 2 Jul | Portugal | Croatia | Home Win | Home Win | ✓ |
-| 2 Jul | Switzerland | Algeria | Draw | Draw | ✓ |
-| 3 Jul | Australia | Egypt | Draw | Away Win | ✗ |
-| 3 Jul | Argentina | Cabo Verde | Home Win | Home Win | ✓ |
-| 3 Jul | Colombia | Ghana | Home Win | Home Win | ✓ |
-| 4 Jul | Canada | Morocco | Draw | Away Win | ✗ |
+| 9 Jul | France | Morocco | Home Win | Home Win | 61.9% / 22.7% / 15.4% |
+| 10 Jul | Spain | Belgium | Home Win | Home Win | 43.4% / 33.5% / 23.2% |
+| 11 Jul | Norway | England | Away Win | Away Win | 14.9% / 31.7% / 53.4% |
+| 11 Jul | Argentina | Switzerland | Home Win | Home Win | 59.5% / 20.7% / 19.8% |
 
-**Notable picks:**
-- Norway predicted to beat Côte d'Ivoire (both models agree on the upset)
-- Senegal predicted to beat Belgium (both models agree)
-- France, England, Argentina, Colombia, Spain, and Portugal all predicted to progress
-- 3 disagreements: Mexico/Ecuador, Australia/Egypt, Canada/Morocco — all close matches where RF leans toward a draw
+**Predicted QF winners:** France, Spain, England, Argentina
+
+---
+
+## Semifinal Predictions
+
+Using predicted QF winners to construct the bracket:
+
+| Date | Home | Away | Prediction | RF Probs (HW / D / AW) |
+|---|---|---|---|---|
+| 14 Jul | France | Spain | **Spain** | 15.6% / 43.6% / 40.9% |
+| 15 Jul | England | Argentina | **Argentina** | 18.9% / 27.2% / 54.0% |
+
+Both models agree on both semifinals. Spain predicted to edge France (as slight away favourites), Argentina predicted to beat England.
+
+---
+
+## Final Prediction — 2026 World Cup
+
+| Date | Home | Away | RF | LR | RF Probs (HW / D / AW) |
+|---|---|---|---|---|---|
+| 19 Jul | Spain | Argentina | **Argentina** | **Argentina** | 33.4% / 29.8% / 36.7% |
+
+**🏆 Predicted 2026 World Cup Winner: Argentina**
+
+The final is the tightest call in the entire bracket — RF gives Argentina a 36.7% win probability vs Spain's 33.4%, only 3.3 percentage points separating them. LR is more decisive at 39.7% vs 26.7% for Argentina. Both models agree Argentina lifts the trophy.
+
+Argentina's edge comes from: superior squad market value, better recent form (surviving a scare vs Cabo Verde 3–2 and Egypt 3–2), and a strong historical H2H record against European opponents in World Cup knockouts.
 
 ---
 
 ## What's Next
-- Continue to Round of 16 predictions as knockout results come in
-- Retrain again on knockout data for each subsequent round
-- Tournament bracket simulation (group standings → champion)
+- Retrain again with QF results as they come in for updated SF/Final predictions
+- Tournament bracket simulation (probability-weighted path to champion)
 - Adding lineup-based features from the 3.2M row game_lineups dataset
