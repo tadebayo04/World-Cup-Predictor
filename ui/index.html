@@ -104,10 +104,6 @@
     border-radius: 12px; padding: 18px 20px 14px; margin-bottom: 12px;
   }
 
-  .card .top {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 8px; margin-bottom: 2px;
-  }
   .teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
   .team { display: flex; flex-direction: column; gap: 1px; }
   .team.away { text-align: right; align-items: flex-end; }
@@ -122,7 +118,7 @@
 
   .bar {
     display: flex; gap: 2px; height: 14px; border-radius: 7px;
-    overflow: hidden; margin: 10px 0 8px; background: var(--surface-1);
+    overflow: hidden; margin: 10px 0 8px;
   }
   .seg { height: 100%; min-width: 3px; cursor: default; }
   .seg.h { background: var(--home); }
@@ -195,16 +191,117 @@
   #tip .t-sub { opacity: .75; }
 
   footer { margin-top: 40px; color: var(--ink-3); font-size: 12.5px; border-top: 1px solid var(--grid); padding-top: 14px; }
+
+  /* ── Tournament Tracker ─────────────────────────────── */
+  #tracker { margin: 28px 0 4px; }
+
+  .tracker-section-head {
+    font-size: 11.5px; font-weight: 700; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    border-bottom: 1px solid var(--grid); padding-bottom: 6px;
+    margin: 24px 0 12px;
+  }
+
+  .champion-banner {
+    background: var(--surface-1); border: 2px solid var(--home);
+    border-radius: 12px; padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .champ-label { font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
+  .champ-team  { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .champ-note  { font-size: 12.5px; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
+
+  .acc-track {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px; margin-bottom: 4px;
+  }
+  .acc-tile {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+  }
+  .acc-tile .acc-round  { font-size: 12.5px; color: var(--ink-2); }
+  .acc-tile .acc-nums   { font-size: 19px; font-weight: 600; margin-top: 2px; }
+  .acc-tile .acc-detail { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+
+  .r16-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px;
+  }
+  .r16-item {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 14px;
+    display: flex; align-items: center; gap: 6px; font-size: 13.5px;
+  }
+  .r16-score { font-variant-numeric: tabular-nums; font-weight: 600; padding: 0 4px; white-space: nowrap; }
+  .r16-adv   { color: var(--good); font-size: 12px; margin-left: auto; white-space: nowrap; }
+  .r16-upset { color: var(--away) !important; }
+
+  .ko-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px;
+  }
+  .ko-card {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .ko-teams-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 6px; margin-bottom: 8px;
+  }
+  .ko-team   { display: flex; flex-direction: column; gap: 2px; }
+  .ko-team.r { text-align: right; align-items: flex-end; }
+  .ko-flag   { font-size: 18px; line-height: 1; }
+  .ko-name   { font-size: 13px; font-weight: 600; }
+  .ko-pct    { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .ko-mid    { text-align: center; color: var(--ink-3); font-size: 12px; }
+  .ko-bar    { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 0 0 8px; gap: 2px; }
+  .ko-bar .ks   { height: 100%; min-width: 2px; }
+  .ko-bar .ks.h { background: var(--home); }
+  .ko-bar .ks.d { background: var(--draw); }
+  .ko-bar .ks.a { background: var(--away); }
+  .ko-winner-row { display: flex; align-items: center; gap: 5px; font-size: 13px; }
+  .ko-crown      { font-size: 11px; }
+  .ko-winner-name { font-weight: 600; }
+  .ko-agree      { font-size: 11.5px; color: var(--good); margin-left: auto; }
+
+  .final-tracker-card {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px;
+  }
+  .final-teams {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 12px; margin-bottom: 12px;
+  }
+  .final-team   { display: flex; flex-direction: column; gap: 2px; }
+  .final-team.r { text-align: right; align-items: flex-end; }
+  .final-flag   { font-size: 28px; line-height: 1; }
+  .final-tname  { font-size: 18px; font-weight: 700; }
+  .final-tpct   { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .final-mid    { text-align: center; }
+  .final-mid .f-vs   { color: var(--ink-3); font-size: 14px; display: block; }
+  .final-mid .f-draw { color: var(--ink-3); font-size: 12.5px; }
+  .final-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; margin-bottom: 14px; }
+  .final-bar .fs   { height: 100%; min-width: 3px; }
+  .final-bar .fs.h { background: var(--home); }
+  .final-bar .fs.d { background: var(--draw); }
+  .final-bar .fs.a { background: var(--away); }
+  .final-winner-block {
+    text-align: center; padding: 12px 16px; background: var(--chip-bg); border-radius: 8px;
+  }
+  .fw-label { font-size: 11.5px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; }
+  .fw-team  { font-size: 20px; font-weight: 700; margin-top: 4px; }
+  .fw-note  { font-size: 12px; color: var(--ink-3); margin-top: 3px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>World Cup 2026 · Match Predictions</h1>
-    <p class="sub">Every remaining fixture, the model’s predicted result, and the data behind
-      each call — FIFA ranking, recent form, head-to-head record, squad market value and venue.</p>
+    <h1>World Cup 2026 · Tournament Tracker</h1>
+    <p class="sub">Full tournament progression — group stage accuracy, Round of 16 results,
+      and model predictions from the quarterfinals through the final.</p>
     <p class="meta" id="meta"></p>
   </header>
+
+  <section id="tracker"></section>
 
   <section class="tiles" id="tiles"></section>
 
@@ -228,7 +325,8 @@
   <footer>
     Predictions are the average of a Random Forest and a Logistic Regression model trained on
     international results since 1993 with FIFA rankings, rolling form, head-to-head and squad-value
-    features. Probabilities are model estimates, not betting advice.
+    features. Bracket predictions (QF onwards) use v3 models retrained after the Round of 16.
+    Probabilities are model estimates, not betting advice.
   </footer>
 </div>
 <div id="tip" role="tooltip"></div>
@@ -242,20 +340,153 @@
 
   const state = { stage: 'All', query: '', view: 'cards' };
 
-  /* ── Meta + stat tiles ── */
+  /* ── Meta ── */
   document.getElementById('meta').textContent =
     WC_DATA.tournament + ' · ' + matches.length + ' fixtures · predictions generated ' + WC_DATA.generated;
 
-  const agree = matches.filter(m => m.models.agree).length;
-  const draws = matches.filter(m => m.call === 'Draw').length;
-  const top = matches.reduce((a, b) => (b.call !== 'Draw' && b.confidence > a.confidence ? b : a),
-                             { confidence: 0, winner: '—' });
+  /* ── Tournament Tracker ── */
+  (function renderTracker() {
+    const acc  = WC_DATA.accuracy;
+    const r16  = WC_DATA.r16Results;
+    const br   = WC_DATA.bracket;
+    const champ     = WC_DATA.champion;
+    const champFlag = WC_DATA.championFlag;
+
+    function koCard(m) {
+      const hw = m.probs.home, dr = m.probs.draw, aw = m.probs.away;
+      const isHW = m.winner === m.home;
+      return '<div class="ko-card">' +
+        '<div class="ko-teams-row">' +
+          '<div class="ko-team">' +
+            '<span class="ko-flag">' + m.homeFlag + '</span>' +
+            '<span class="ko-name">' + esc(m.home) + '</span>' +
+            '<span class="ko-pct">' + pct(hw) + ' win</span>' +
+          '</div>' +
+          '<div class="ko-mid">vs</div>' +
+          '<div class="ko-team r">' +
+            '<span class="ko-flag">' + m.awayFlag + '</span>' +
+            '<span class="ko-name">' + esc(m.away) + '</span>' +
+            '<span class="ko-pct">' + pct(aw) + ' win</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ko-bar">' +
+          '<div class="ks h" style="width:' + (hw * 100) + '%"></div>' +
+          '<div class="ks d" style="width:' + (dr * 100) + '%"></div>' +
+          '<div class="ks a" style="width:' + (aw * 100) + '%"></div>' +
+        '</div>' +
+        '<div class="ko-winner-row">' +
+          '<span class="ko-crown">🏆</span>' +
+          '<span class="ko-winner-name">' + esc(m.winner) + '</span>' +
+          '<span class="ko-pct" style="color:var(--ink-2);margin-left:2px">' +
+            pct(isHW ? hw : aw) + (isHW ? ' HW' : ' AW') +
+          '</span>' +
+          '<span class="ko-agree">✓ Both agree</span>' +
+        '</div>' +
+      '</div>';
+    }
+
+    let h = '';
+
+    /* Champion banner */
+    h += '<div class="champion-banner">' +
+      '<span class="champ-label">Predicted 2026 Champion</span>' +
+      '<span class="champ-team">' + champFlag + ' ' + esc(champ) + '</span>' +
+      '<span class="champ-note">Both models agree · Final Jul 19</span>' +
+    '</div>';
+
+    /* Accuracy tiles */
+    h += '<div class="acc-track">';
+    [
+      ['Group Stage (72 matches)', acc.groupStage.rfPct + '% · LR ' + acc.groupStage.lrPct + '%',
+       acc.groupStage.rfCorrect + ' / ' + acc.groupStage.lrCorrect + ' of ' + acc.groupStage.total + ' correct', 'RF '],
+      ['Round of 32 (13 matches)', acc.r32.rfPct + '% · LR ' + acc.r32.lrPct + '%',
+       acc.r32.rfCorrect + ' / ' + acc.r32.lrCorrect + ' of ' + acc.r32.total + ' correct', 'RF '],
+    ].forEach(function(a) {
+      h += '<div class="acc-tile">' +
+        '<div class="acc-round">' + a[0] + '</div>' +
+        '<div class="acc-nums">' + a[3] + a[1] + '</div>' +
+        '<div class="acc-detail">' + a[2] + '</div>' +
+      '</div>';
+    });
+    h += '</div>';
+
+    /* R16 results */
+    h += '<div class="tracker-section-head">Round of 16 Results — July 4–7</div>';
+    h += '<div class="r16-grid">';
+    r16.forEach(function(m) {
+      const wFlag = m.winner === m.home ? m.homeFlag : m.awayFlag;
+      h += '<div class="r16-item">' +
+        '<span>' + m.homeFlag + ' ' + esc(m.home) + '</span>' +
+        '<span class="r16-score">' + m.score + '</span>' +
+        '<span>' + esc(m.away) + ' ' + m.awayFlag + '</span>' +
+        '<span class="r16-adv' + (m.upset ? ' r16-upset' : '') + '">' +
+          wFlag + ' ' + esc(m.winner) + (m.upset ? ' ⚡' : ' ✓') +
+        '</span>' +
+      '</div>';
+    });
+    h += '</div>';
+
+    /* Quarterfinals */
+    h += '<div class="tracker-section-head">Quarterfinals — July 9–11</div>';
+    h += '<div class="ko-grid">';
+    br.qf.forEach(function(m) { h += koCard(m); });
+    h += '</div>';
+
+    /* Semifinals */
+    h += '<div class="tracker-section-head">Semifinals — July 14–15</div>';
+    h += '<div class="ko-grid">';
+    br.sf.forEach(function(m) { h += koCard(m); });
+    h += '</div>';
+
+    /* Final */
+    var fin = br.final[0];
+    var fhw = fin.probs.home, fdr = fin.probs.draw, faw = fin.probs.away;
+    var finIsHW = fin.winner === fin.home;
+    h += '<div class="tracker-section-head">Final — July 19, 2026</div>';
+    h += '<div class="final-tracker-card">' +
+      '<div class="final-teams">' +
+        '<div class="final-team">' +
+          '<span class="final-flag">' + fin.homeFlag + '</span>' +
+          '<span class="final-tname">' + esc(fin.home) + '</span>' +
+          '<span class="final-tpct"><b>' + pct(fhw) + '</b> win probability</span>' +
+        '</div>' +
+        '<div class="final-mid">' +
+          '<span class="f-vs">vs</span>' +
+          '<span class="f-draw">draw ' + pct(fdr) + '</span>' +
+        '</div>' +
+        '<div class="final-team r">' +
+          '<span class="final-flag">' + fin.awayFlag + '</span>' +
+          '<span class="final-tname">' + esc(fin.away) + '</span>' +
+          '<span class="final-tpct"><b>' + pct(faw) + '</b> win probability</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="final-bar">' +
+        '<div class="fs h" style="width:' + (fhw * 100) + '%"></div>' +
+        '<div class="fs d" style="width:' + (fdr * 100) + '%"></div>' +
+        '<div class="fs a" style="width:' + (faw * 100) + '%"></div>' +
+      '</div>' +
+      '<div class="final-winner-block">' +
+        '<div class="fw-label">🏆 Predicted Winner</div>' +
+        '<div class="fw-team">' + (finIsHW ? fin.homeFlag : fin.awayFlag) + ' ' + esc(fin.winner) + '</div>' +
+        '<div class="fw-note">' +
+          'RF ' + pct(finIsHW ? fin.models.rf.home : fin.models.rf.away) +
+          ' · LR ' + pct(finIsHW ? fin.models.lr.home : fin.models.lr.away) +
+          ' · Tightest call of the bracket (3.3 pp margin)' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    document.getElementById('tracker').innerHTML = h;
+  })();
+
+  /* ── Stat tiles ── */
+  var gs  = WC_DATA.accuracy.groupStage;
+  var r32 = WC_DATA.accuracy.r32;
   document.getElementById('tiles').innerHTML = [
-    tile('Fixtures predicted', matches.length, '72 group stage · 13 round of 32'),
-    tile('Models agree', Math.round(100 * agree / matches.length) + '%',
-         agree + ' of ' + matches.length + ' fixtures'),
-    tile('Strongest pick', esc(top.winner), pct(top.confidence) + ' win probability'),
-    tile('Predicted draws', draws, 'of ' + matches.length + ' fixtures'),
+    tile('Predicted champion', WC_DATA.championFlag + ' ' + WC_DATA.champion, 'Both models agree · Jul 19 Final'),
+    tile('Group stage accuracy', 'RF ' + gs.rfPct + '%',  'LR ' + gs.lrPct  + '% · ' + gs.total  + ' matches'),
+    tile('Round of 32 accuracy', 'RF ' + r32.rfPct + '%', 'LR ' + r32.lrPct + '% · ' + r32.total + ' matches'),
+    tile('Fixtures predicted', matches.length, '72 group · 13 R32 · 7 bracket'),
   ].join('');
   function tile(label, value, note) {
     return '<div class="tile"><div class="label">' + label + '</div>' +
@@ -264,28 +495,29 @@
   }
 
   /* ── Stage filter chips ── */
-  const stages = ['All', 'Group Stage', 'Round of 32'];
-  const chipBox = document.getElementById('stage-chips');
-  chipBox.innerHTML = stages.map(s =>
-    '<button class="chip" data-stage="' + s + '" aria-pressed="' + (s === 'All') + '">' + s + '</button>'
-  ).join('');
-  chipBox.addEventListener('click', e => {
-    const b = e.target.closest('[data-stage]');
+  var stages = ['All', 'Group Stage', 'Round of 32', 'Quarterfinal', 'Semifinal', 'Final'];
+  var chipBox = document.getElementById('stage-chips');
+  chipBox.innerHTML = stages.map(function(s) {
+    return '<button class="chip" data-stage="' + s + '" aria-pressed="' + (s === 'All') + '">' + s + '</button>';
+  }).join('');
+  chipBox.addEventListener('click', function(e) {
+    var b = e.target.closest('[data-stage]');
     if (!b) return;
     state.stage = b.dataset.stage;
-    chipBox.querySelectorAll('.chip').forEach(c =>
-      c.setAttribute('aria-pressed', c === b ? 'true' : 'false'));
+    chipBox.querySelectorAll('.chip').forEach(function(c) {
+      c.setAttribute('aria-pressed', c === b ? 'true' : 'false');
+    });
     render();
   });
 
-  document.getElementById('search').addEventListener('input', e => {
+  document.getElementById('search').addEventListener('input', function(e) {
     state.query = e.target.value.trim().toLowerCase();
     render();
   });
 
-  const vc = document.getElementById('view-cards'), vt = document.getElementById('view-table');
-  vc.addEventListener('click', () => setView('cards'));
-  vt.addEventListener('click', () => setView('table'));
+  var vc = document.getElementById('view-cards'), vt = document.getElementById('view-table');
+  vc.addEventListener('click', function() { setView('cards'); });
+  vt.addEventListener('click', function() { setView('table'); });
   function setView(v) {
     state.view = v;
     vc.setAttribute('aria-pressed', v === 'cards');
@@ -294,28 +526,47 @@
   }
 
   function filtered() {
-    return matches.filter(m =>
-      (state.stage === 'All' || m.stage === state.stage) &&
-      (!state.query || m.home.toLowerCase().includes(state.query) ||
-                       m.away.toLowerCase().includes(state.query)));
+    return matches.filter(function(m) {
+      return (state.stage === 'All' || m.stage === state.stage) &&
+             (!state.query || m.home.toLowerCase().includes(state.query) ||
+                              m.away.toLowerCase().includes(state.query));
+    });
   }
 
-  const fmtDate = iso => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB',
-    { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  var fmtDate = function(iso) {
+    return new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB',
+      { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  };
 
   /* ── Card view ── */
   function cardHTML(m, i) {
-    const winHome = m.winner === m.home, winAway = m.winner === m.away;
-    const f = m.features;
+    var winHome = m.winner === m.home, winAway = m.winner === m.away;
+    var f = m.features;
 
-    const agreeLine = m.models.agree
+    var agreeLine = m.models.agree
       ? '<span class="agree">✓ Both models agree: ' + esc(m.call) + '</span>'
-      : '<span class="split">⚖ Models split — Random Forest: ' + esc(m.models.rf.prediction) +
-        ' · Logistic Regression: ' + esc(m.models.lr.prediction) + '</span>';
+      : '<span class="split">⚖ Models split — RF: ' + esc(m.models.rf.prediction) +
+        ' · LR: ' + esc(m.models.lr.prediction) + '</span>';
 
-    const whyLabel = m.winner === 'Draw'
-      ? 'Why a draw?'
-      : 'Why ' + esc(m.winner) + '?';
+    var detailSection = '';
+    if (f) {
+      var whyLabel = m.winner === 'Draw' ? 'Why a draw?' : 'Why ' + esc(m.winner) + '?';
+      detailSection =
+        '<details class="why">' +
+          '<summary><span class="tri">▶</span>' + whyLabel + ' — the data behind the call</summary>' +
+          (m.models.agree ? '' :
+            '<p class="model-split-note">The headline call averages both models’ probabilities.</p>') +
+          '<ul class="reasons">' + (m.reasons || []).map(function(r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul>' +
+          '<div class="cmp">' +
+            cmpRow('FIFA ranking', '#' + f.rank[0], '#' + f.rank[1], rankFrac(f.rank[0]), rankFrac(f.rank[1])) +
+            cmpRow('Ranking points', f.points[0].toLocaleString(), f.points[1].toLocaleString(), f.points[0] / 2200, f.points[1] / 2200) +
+            cmpRow('Form, pts/game (last 5)', f.form5[0].toFixed(1), f.form5[1].toFixed(1), f.form5[0] / 3, f.form5[1] / 3) +
+            cmpRow('Avg goal diff (last 5)', signed(f.goalDiff5[0]), signed(f.goalDiff5[1]), gdFrac(f.goalDiff5[0]), gdFrac(f.goalDiff5[1])) +
+            cmpRow('Squad market value', f.squadValueLabel[0], f.squadValueLabel[1], svFrac(f.squadValue[0]), svFrac(f.squadValue[1])) +
+          '</div>' +
+          '<div class="h2h-line">Head-to-head: ' + h2hText(m) + '</div>' +
+        '</details>';
+    }
 
     return '<article class="card">' +
       '<div class="teams">' +
@@ -331,38 +582,17 @@
           '<span class="pct"><b>' + pct(m.probs.away) + '</b> win</span>' +
         '</div>' +
       '</div>' +
-
       '<div class="bar" data-i="' + i + '">' +
         '<div class="seg h" style="width:' + (m.probs.home * 100) + '%" data-o="home"></div>' +
         '<div class="seg d" style="width:' + (m.probs.draw * 100) + '%" data-o="draw"></div>' +
         '<div class="seg a" style="width:' + (m.probs.away * 100) + '%" data-o="away"></div>' +
       '</div>' +
-
       '<div class="meta-row">' +
         '<span class="tag">' + esc(m.stage) + '</span>' +
         (m.neutral ? '' : '<span class="tag">🏟 ' + esc(m.home) + ' at home</span>') +
         agreeLine +
       '</div>' +
-
-      '<details class="why">' +
-        '<summary><span class="tri">▶</span>' + whyLabel + ' — the data behind the call</summary>' +
-        (m.models.agree ? '' :
-          '<p class="model-split-note">The headline call averages both models’ probabilities.</p>') +
-        '<ul class="reasons">' + m.reasons.map(r => '<li>' + esc(r) + '</li>').join('') + '</ul>' +
-        '<div class="cmp">' +
-          cmpRow('FIFA ranking', '#' + f.rank[0], '#' + f.rank[1],
-                 rankFrac(f.rank[0]), rankFrac(f.rank[1])) +
-          cmpRow('Ranking points', f.points[0].toLocaleString(), f.points[1].toLocaleString(),
-                 f.points[0] / 2200, f.points[1] / 2200) +
-          cmpRow('Form, pts/game (last 5)', f.form5[0].toFixed(1), f.form5[1].toFixed(1),
-                 f.form5[0] / 3, f.form5[1] / 3) +
-          cmpRow('Avg goal diff (last 5)', signed(f.goalDiff5[0]), signed(f.goalDiff5[1]),
-                 gdFrac(f.goalDiff5[0]), gdFrac(f.goalDiff5[1])) +
-          cmpRow('Squad market value', f.squadValueLabel[0], f.squadValueLabel[1],
-                 svFrac(f.squadValue[0]), svFrac(f.squadValue[1])) +
-        '</div>' +
-        '<div class="h2h-line">Head-to-head: ' + h2hText(m) + '</div>' +
-      '</details>' +
+      detailSection +
     '</article>';
   }
 
@@ -375,14 +605,14 @@
       '<span class="val">' + rv + '</span>' +
     '</div>';
   }
-  const clampPct = f => Math.max(3, Math.min(100, f * 100)).toFixed(1);
-  const rankFrac = r => (211 - r) / 210;                     // lower rank = longer bar
-  const gdFrac = g => (g + 3) / 6;                           // -3..+3 window
-  const svFrac = v => v <= 0 ? 0 : Math.log10(v / 1e6 + 1) / Math.log10(2001); // 0..~2B log scale
-  const signed = n => (n > 0 ? '+' : '') + n.toFixed(1);
+  var clampPct = function(f) { return Math.max(3, Math.min(100, f * 100)).toFixed(1); };
+  var rankFrac = function(r) { return (211 - r) / 210; };
+  var gdFrac   = function(g) { return (g + 3) / 6; };
+  var svFrac   = function(v) { return v <= 0 ? 0 : Math.log10(v / 1e6 + 1) / Math.log10(2001); };
+  var signed   = function(n) { return (n > 0 ? '+' : '') + n.toFixed(1); };
 
   function h2hText(m) {
-    const h = m.features.h2h, total = h.homeWins + h.awayWins + h.draws;
+    var h = m.features.h2h, total = h.homeWins + h.awayWins + h.draws;
     if (!total) return 'these teams have never met';
     return esc(m.home) + ' ' + h.homeWins + ' wins · ' + h.draws + ' draws · ' +
            esc(m.away) + ' ' + h.awayWins + ' wins (' + total + ' meetings)';
@@ -390,18 +620,19 @@
 
   /* ── Table view ── */
   function tableHTML(list) {
-    const rows = list.map(m =>
-      '<tr>' +
-      '<td>' + m.date + '</td>' +
-      '<td>' + m.homeFlag + ' ' + esc(m.home) + ' – ' + esc(m.away) + ' ' + m.awayFlag + '</td>' +
-      '<td>' + esc(m.stage) + '</td>' +
-      '<td><span class="winner-cell">' + esc(m.winner) + '</span></td>' +
-      '<td class="num">' + pct(m.probs.home) + '</td>' +
-      '<td class="num">' + pct(m.probs.draw) + '</td>' +
-      '<td class="num">' + pct(m.probs.away) + '</td>' +
-      '<td>' + esc(m.models.rf.prediction) + '</td>' +
-      '<td>' + esc(m.models.lr.prediction) + '</td>' +
-      '</tr>').join('');
+    var rows = list.map(function(m) {
+      return '<tr>' +
+        '<td>' + m.date + '</td>' +
+        '<td>' + m.homeFlag + ' ' + esc(m.home) + ' – ' + esc(m.away) + ' ' + m.awayFlag + '</td>' +
+        '<td>' + esc(m.stage) + '</td>' +
+        '<td><span class="winner-cell">' + esc(m.winner) + '</span></td>' +
+        '<td class="num">' + pct(m.probs.home) + '</td>' +
+        '<td class="num">' + pct(m.probs.draw) + '</td>' +
+        '<td class="num">' + pct(m.probs.away) + '</td>' +
+        '<td>' + esc(m.models.rf.prediction) + '</td>' +
+        '<td>' + esc(m.models.lr.prediction) + '</td>' +
+      '</tr>';
+    }).join('');
     return '<div class="table-wrap"><table>' +
       '<thead><tr><th>Date</th><th>Match</th><th>Stage</th><th>Predicted</th>' +
       '<th class="num">Home %</th><th class="num">Draw %</th><th class="num">Away %</th>' +
@@ -410,9 +641,9 @@
   }
 
   /* ── Render ── */
-  const app = document.getElementById('app');
+  var app = document.getElementById('app');
   function render() {
-    const list = filtered();
+    var list = filtered();
     document.getElementById('legend').style.display = state.view === 'cards' ? 'flex' : 'none';
     if (!list.length) {
       app.innerHTML = '<p class="empty">No fixtures match this filter.</p>';
@@ -422,8 +653,8 @@
       app.innerHTML = tableHTML(list);
       return;
     }
-    let html = '', lastDate = '';
-    list.forEach(m => {
+    var html = '', lastDate = '';
+    list.forEach(function(m) {
       if (m.date !== lastDate) {
         lastDate = m.date;
         html += '<div class="date-head"><h2>' + fmtDate(m.date) + '</h2>' +
@@ -435,24 +666,24 @@
   }
   render();
 
-  /* ── Tooltip on probability-bar segments ── */
-  const tip = document.getElementById('tip');
-  app.addEventListener('mousemove', e => {
-    const seg = e.target.closest('.seg');
+  /* ── Tooltip ── */
+  var tip = document.getElementById('tip');
+  app.addEventListener('mousemove', function(e) {
+    var seg = e.target.closest('.seg');
     if (!seg) { tip.style.display = 'none'; return; }
-    const m = matches[+seg.parentElement.dataset.i];
-    const o = seg.dataset.o;
-    const label = { home: esc(m.home) + ' win', draw: 'Draw', away: esc(m.away) + ' win' }[o];
+    var m = matches[+seg.parentElement.dataset.i];
+    var o = seg.dataset.o;
+    var label = { home: esc(m.home) + ' win', draw: 'Draw', away: esc(m.away) + ' win' }[o];
     tip.innerHTML = '<div class="t-head">' + label + ' — ' + pct(m.probs[o]) + '</div>' +
       '<div class="t-sub">Random Forest ' + pct(m.models.rf[o]) +
       ' · Logistic Regression ' + pct(m.models.lr[o]) + '</div>';
     tip.style.display = 'block';
-    const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
-    const y = Math.min(e.clientY + 14, window.innerHeight - tip.offsetHeight - 10);
+    var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 10);
+    var y = Math.min(e.clientY + 14, window.innerHeight - tip.offsetHeight - 10);
     tip.style.left = x + 'px';
     tip.style.top = y + 'px';
   });
-  app.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  app.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
 })();
 </script>
 </body>

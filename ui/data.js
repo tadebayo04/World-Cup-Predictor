@@ -5738,6 +5738,134 @@ const WC_DATA = {
     "Squad worth 3× more on the transfer market (€450M vs €143M)",
     "Leads the head-to-head record 2–0 (1 draw) against Canada"
    ]
+  },
+  {
+   "date": "2026-07-09", "stage": "Quarterfinal",
+   "home": "France", "away": "Morocco", "homeFlag": "🇫🇷", "awayFlag": "🇲🇦",
+   "neutral": true, "winner": "France", "call": "Home Win", "confidence": 0.5230,
+   "probs": {"home": 0.5230, "draw": 0.2830, "away": 0.1940},
+   "models": {
+    "rf":  {"prediction": "Home Win", "home": 0.619, "draw": 0.227, "away": 0.154},
+    "lr":  {"prediction": "Home Win", "home": 0.427, "draw": 0.339, "away": 0.234},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-10", "stage": "Quarterfinal",
+   "home": "Spain", "away": "Belgium", "homeFlag": "🇪🇸", "awayFlag": "🇧🇪",
+   "neutral": true, "winner": "Spain", "call": "Home Win", "confidence": 0.3910,
+   "probs": {"home": 0.3910, "draw": 0.3450, "away": 0.2640},
+   "models": {
+    "rf":  {"prediction": "Home Win", "home": 0.434, "draw": 0.335, "away": 0.232},
+    "lr":  {"prediction": "Home Win", "home": 0.348, "draw": 0.355, "away": 0.296},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-11", "stage": "Quarterfinal",
+   "home": "Norway", "away": "England", "homeFlag": "🇳🇴", "awayFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+   "neutral": true, "winner": "England", "call": "Away Win", "confidence": 0.5390,
+   "probs": {"home": 0.1560, "draw": 0.3060, "away": 0.5390},
+   "models": {
+    "rf":  {"prediction": "Away Win", "home": 0.149, "draw": 0.317, "away": 0.534},
+    "lr":  {"prediction": "Away Win", "home": 0.162, "draw": 0.294, "away": 0.544},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-11", "stage": "Quarterfinal",
+   "home": "Argentina", "away": "Switzerland", "homeFlag": "🇦🇷", "awayFlag": "🇨🇭",
+   "neutral": true, "winner": "Argentina", "call": "Home Win", "confidence": 0.4970,
+   "probs": {"home": 0.4970, "draw": 0.2760, "away": 0.2280},
+   "models": {
+    "rf":  {"prediction": "Home Win", "home": 0.595, "draw": 0.207, "away": 0.198},
+    "lr":  {"prediction": "Home Win", "home": 0.399, "draw": 0.344, "away": 0.257},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-14", "stage": "Semifinal",
+   "home": "France", "away": "Spain", "homeFlag": "🇫🇷", "awayFlag": "🇪🇸",
+   "neutral": true, "winner": "Spain", "call": "Away Win", "confidence": 0.4260,
+   "probs": {"home": 0.1740, "draw": 0.4010, "away": 0.4260},
+   "models": {
+    "rf":  {"prediction": "Away Win", "home": 0.156, "draw": 0.436, "away": 0.409},
+    "lr":  {"prediction": "Away Win", "home": 0.192, "draw": 0.366, "away": 0.442},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-15", "stage": "Semifinal",
+   "home": "England", "away": "Argentina", "homeFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "awayFlag": "🇦🇷",
+   "neutral": true, "winner": "Argentina", "call": "Away Win", "confidence": 0.5050,
+   "probs": {"home": 0.1930, "draw": 0.3030, "away": 0.5050},
+   "models": {
+    "rf":  {"prediction": "Away Win", "home": 0.189, "draw": 0.272, "away": 0.540},
+    "lr":  {"prediction": "Away Win", "home": 0.197, "draw": 0.333, "away": 0.469},
+    "agree": true
+   }
+  },
+  {
+   "date": "2026-07-19", "stage": "Final",
+   "home": "Spain", "away": "Argentina", "homeFlag": "🇪🇸", "awayFlag": "🇦🇷",
+   "neutral": true, "winner": "Argentina", "call": "Away Win", "confidence": 0.3820,
+   "probs": {"home": 0.3010, "draw": 0.3170, "away": 0.3820},
+   "models": {
+    "rf":  {"prediction": "Away Win", "home": 0.334, "draw": 0.298, "away": 0.367},
+    "lr":  {"prediction": "Away Win", "home": 0.267, "draw": 0.336, "away": 0.397},
+    "agree": true
+   }
   }
- ]
+ ],
+ "accuracy": {
+  "groupStage": {"rfPct": 43.1, "lrPct": 45.8, "rfCorrect": 31, "lrCorrect": 33, "total": 72},
+  "r32":        {"rfPct": 69.2, "lrPct": 76.9, "rfCorrect":  9, "lrCorrect": 10, "total": 13}
+ },
+ "r16Results": [
+  {"date":"2026-07-04","home":"Paraguay",    "away":"France",     "homeFlag":"🇵🇾","awayFlag":"🇫🇷","score":"0–1","winner":"France",      "upset":false},
+  {"date":"2026-07-05","home":"Brazil",      "away":"Norway",     "homeFlag":"🇧🇷","awayFlag":"🇳🇴","score":"1–2","winner":"Norway",      "upset":true},
+  {"date":"2026-07-05","home":"Mexico",      "away":"England",    "homeFlag":"🇲🇽","awayFlag":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","score":"2–3","winner":"England",     "upset":false},
+  {"date":"2026-07-06","home":"Portugal",    "away":"Spain",      "homeFlag":"🇵🇹","awayFlag":"🇪🇸","score":"0–1","winner":"Spain",       "upset":false},
+  {"date":"2026-07-06","home":"USA",         "away":"Belgium",    "homeFlag":"🇺🇸","awayFlag":"🇧🇪","score":"1–4","winner":"Belgium",      "upset":false},
+  {"date":"2026-07-07","home":"Argentina",   "away":"Egypt",      "homeFlag":"🇦🇷","awayFlag":"🇪🇬","score":"3–2","winner":"Argentina",   "upset":false},
+  {"date":"2026-07-07","home":"Switzerland", "away":"Colombia",   "homeFlag":"🇨🇭","awayFlag":"🇨🇴","score":"0–0 (pens)","winner":"Switzerland","upset":false}
+ ],
+ "bracket": {
+  "qf": [
+   {"id":"QF1","date":"2026-07-09","home":"France",    "away":"Morocco",      "homeFlag":"🇫🇷","awayFlag":"🇲🇦",
+    "winner":"France",    "winSide":"home",
+    "probs":{"home":0.523,"draw":0.283,"away":0.194},
+    "models":{"rf":{"home":0.619,"draw":0.227,"away":0.154},"lr":{"home":0.427,"draw":0.339,"away":0.234},"agree":true}},
+   {"id":"QF2","date":"2026-07-10","home":"Spain",     "away":"Belgium",      "homeFlag":"🇪🇸","awayFlag":"🇧🇪",
+    "winner":"Spain",     "winSide":"home",
+    "probs":{"home":0.391,"draw":0.345,"away":0.264},
+    "models":{"rf":{"home":0.434,"draw":0.335,"away":0.232},"lr":{"home":0.348,"draw":0.355,"away":0.296},"agree":true}},
+   {"id":"QF3","date":"2026-07-11","home":"Norway",    "away":"England",      "homeFlag":"🇳🇴","awayFlag":"🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "winner":"England",   "winSide":"away",
+    "probs":{"home":0.156,"draw":0.306,"away":0.539},
+    "models":{"rf":{"home":0.149,"draw":0.317,"away":0.534},"lr":{"home":0.162,"draw":0.294,"away":0.544},"agree":true}},
+   {"id":"QF4","date":"2026-07-11","home":"Argentina", "away":"Switzerland",  "homeFlag":"🇦🇷","awayFlag":"🇨🇭",
+    "winner":"Argentina", "winSide":"home",
+    "probs":{"home":0.497,"draw":0.276,"away":0.228},
+    "models":{"rf":{"home":0.595,"draw":0.207,"away":0.198},"lr":{"home":0.399,"draw":0.344,"away":0.257},"agree":true}}
+  ],
+  "sf": [
+   {"id":"SF1","date":"2026-07-14","home":"France",  "away":"Spain",      "homeFlag":"🇫🇷","awayFlag":"🇪🇸",
+    "winner":"Spain",     "winSide":"away",
+    "probs":{"home":0.174,"draw":0.401,"away":0.426},
+    "models":{"rf":{"home":0.156,"draw":0.436,"away":0.409},"lr":{"home":0.192,"draw":0.366,"away":0.442},"agree":true}},
+   {"id":"SF2","date":"2026-07-15","home":"England", "away":"Argentina",  "homeFlag":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","awayFlag":"🇦🇷",
+    "winner":"Argentina", "winSide":"away",
+    "probs":{"home":0.193,"draw":0.303,"away":0.505},
+    "models":{"rf":{"home":0.189,"draw":0.272,"away":0.540},"lr":{"home":0.197,"draw":0.333,"away":0.469},"agree":true}}
+  ],
+  "final": [
+   {"id":"FIN","date":"2026-07-19","home":"Spain",   "away":"Argentina",  "homeFlag":"🇪🇸","awayFlag":"🇦🇷",
+    "winner":"Argentina", "winSide":"away",
+    "probs":{"home":0.301,"draw":0.317,"away":0.382},
+    "models":{"rf":{"home":0.334,"draw":0.298,"away":0.367},"lr":{"home":0.267,"draw":0.336,"away":0.397},"agree":true}}
+  ]
+ },
+ "champion": "Argentina",
+ "championFlag": "🇦🇷"
 };
